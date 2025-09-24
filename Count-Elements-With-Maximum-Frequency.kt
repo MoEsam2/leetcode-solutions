@@ -1,11 +1,11 @@
 class Solution {
-   fun maxFrequencyElements(nums: IntArray): Int {
+  fun maxFrequencyElements(nums: IntArray): Int {
     val table = HashMap<Int, Int>()
-    for (num in nums) {
+    nums.forEach { num ->
         table[num] = (table[num] ?: 0) + 1
     }
-    val maxValue = table.maxOf { it.value }
-    val count =  table.count { it.value == maxValue } 
-    return maxValue * count
+    val max = table.maxOf { it.value }
+    val numOfMax = table.count { it.value == max }
+    return max * numOfMax
 }
 }
