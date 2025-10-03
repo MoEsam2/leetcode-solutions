@@ -1,6 +1,6 @@
 class Solution {
 fun lengthOfLongestSubstring(s: String): Int {
-    val seen = mutableMapOf<Char, Int>()
+     val seen = mutableMapOf<Char, Int>()
     var left = 0
     var maxLength = 0
     for ((right, c) in s.withIndex()) {
@@ -11,5 +11,6 @@ fun lengthOfLongestSubstring(s: String): Int {
         maxLength = max(maxLength, right - left + 1)
     }
     return maxLength
+
 }
 }
