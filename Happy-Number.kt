@@ -1,16 +1,22 @@
 class Solution {
 fun isHappy(n: Int): Boolean {
-    var str = n.toString()
-    val tab = mutableMapOf<String, Int>()
-    while (!tab.containsKey(str)) {
-        tab[str] = 0
-        if (str == "1") return true
-        var num = 0
-        str.forEach {
-            num += (it.digitToInt() * it.digitToInt())
+    fun next(m: Int): Int {
+        var sum = 0
+        var num = m
+        while (num > 0) {
+            val digit = num % 10
+            sum += (digit * digit)
+            num /= 10
         }
-        str = num.toString()
+        return sum
     }
-    return false
+
+    var slow = n
+    var fast = next(n)
+    while (fast != 1 && slow != fast) {
+        slow = next(slow)
+        fast = next(next(fast))
+    }
+    return fast == 1
 }
 }
