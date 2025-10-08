@@ -5,7 +5,9 @@ fun isPalindrome(s: String): Boolean {
     while (left < right) {
         while (!s[left].isLetterOrDigit() && left != right) left++
         while (!s[right].isLetterOrDigit() && right != left) right--
-        if (s[left].lowercase() != s[right].lowercase()) return false
+        val leftChar = s[left].lowercaseChar()
+        val rightChar = s[right].lowercaseChar()
+        if (leftChar != rightChar) return false
         left++
         right--
     }
