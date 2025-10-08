@@ -1,21 +1,13 @@
 class Solution {
-   fun isPalindrome(s: String): Boolean {
-    var right = s.length-1
+fun isPalindrome(s: String): Boolean {
     var left = 0
+    var right = s.length - 1
     while (left < right) {
-       if (!s[left].isLetterOrDigit()){
-           left++
-           continue
-       }
-        if (!s[right].isLetterOrDigit()){
-            right--
-            continue
-        }
-        if (s[left].lowercase() != s[right].lowercase()){
-            return false
-        }
-        right--
+        while (!s[left].isLetterOrDigit() && left != right) left++
+        while (!s[right].isLetterOrDigit() && right != left) right--
+        if (s[left].lowercase() != s[right].lowercase()) return false
         left++
+        right--
     }
     return true
 }
