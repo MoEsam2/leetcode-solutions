@@ -1,28 +1,27 @@
 class Solution {
 fun threeSum(nums: IntArray): List<List<Int>> {
-    val list = nums.sorted()
-    val result = mutableSetOf<List<Int>>()
-    var middlePointer: Int
-    var rightPointer: Int
-    var target: Int
-    for (leftPointer in 0 until list.size - 1) {
-        target = -list[leftPointer]
-        middlePointer = leftPointer + 1
-        rightPointer = list.size - 1
+    val result = mutableListOf<List<Int>>()
+    nums.sort()
+    for (leftPointer in 0 until nums.size - 1) {
+        if (nums[leftPointer] > 0) break
+        if (leftPointer > 0 && nums[leftPointer] == nums[leftPointer - 1]) continue
+        var middlePointer = leftPointer + 1
+        var rightPointer = nums.size - 1
         while (middlePointer < rightPointer) {
-            val sum = list[middlePointer] + list[rightPointer]
+            val sum = nums[leftPointer] + nums[middlePointer] + nums[rightPointer]
             when {
-                sum == target -> {
-                    result.add(listOf(list[leftPointer], list[middlePointer], list[rightPointer]))
+                sum == 0 -> {
+                    result.add(listOf(nums[leftPointer], nums[middlePointer], nums[rightPointer]))
                     middlePointer++
                     rightPointer--
+                    while (middlePointer < rightPointer && nums[middlePointer] == nums[middlePointer - 1]) middlePointer++
                 }
-                sum < target -> middlePointer++
+
+                sum < 0 -> middlePointer++
                 else -> rightPointer--
             }
         }
-
     }
-    return result.toList()
+    return result
 }
 }
