@@ -15,6 +15,7 @@ fun threeSum(nums: IntArray): List<List<Int>> {
                     middlePointer++
                     rightPointer--
                     while (middlePointer < rightPointer && nums[middlePointer] == nums[middlePointer - 1]) middlePointer++
+                    while (middlePointer < rightPointer && nums[rightPointer] == nums[rightPointer + 1]) rightPointer--
                 }
 
                 sum < 0 -> middlePointer++
