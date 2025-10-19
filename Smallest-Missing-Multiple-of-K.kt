@@ -1,10 +1,13 @@
 class Solution {
-fun missingMultiple(nums: IntArray, k: Int): Int {
-    var counter = k
-    while (counter <= 10000) {
-        if (counter % k == 0 && counter !in nums) return counter
-        else counter = counter +k
+ fun missingMultiple(nums: IntArray, k: Int): Int {
+        val hs = HashSet<Int>()
+        nums.forEach {
+            hs.add(it)
+        }
+        var current = k
+        while(current in hs){
+            current += k
+        }
+        return current
     }
-    return 0
-}
 }
