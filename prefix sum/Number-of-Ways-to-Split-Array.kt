@@ -1,23 +1,15 @@
 class Solution {
 fun waysToSplitArray(nums: IntArray): Int {
-    val n = nums.size
-    val prefixSum = LongArray(n)
-    val suffixSum = LongArray(n)
-    var sum = 0L
+    var leftSum = 0L
+    var rightSum = 0L
     var count = 0
-    for (i in 0 until n) {
-        sum += nums[i]
-        prefixSum[i] = sum
+    for (num in nums) {
+        rightSum += num
     }
-    sum = 0L
-    for (i in n - 1 downTo 0) {
-        sum += nums[i]
-        suffixSum[i] = sum
-    }
-    for (i in 0 until n - 1) {
-        val left = prefixSum[i]
-        val right = suffixSum[i + 1]
-        if (left >= right) count++
+    for (i in 0 until nums.size - 1) {
+        leftSum += nums[i]
+        rightSum -= nums[i]
+        if (leftSum >= rightSum) count++
     }
     return count
 }
