@@ -1,13 +1,16 @@
 class Solution {
-   fun corpFlightBookings(bookings: Array<IntArray>, n: Int): IntArray {
+fun corpFlightBookings(bookings: Array<IntArray>, n: Int): IntArray {
+    val arr = IntArray(n + 1)
+    for (booking in bookings) {
+        val (first, last, seats) = booking
+        arr[first - 1] += seats
+        arr[last] -= seats
+    }
     val result = IntArray(n)
-    for (arr in bookings){
-        val first = arr[0]
-        val last = arr[1]
-        val seats = arr[2]
-        for (i in first..last){
-            result[i-1] +=  seats
-        }
+    var acc =0
+    for (i in 0 until n){
+        acc += arr[i]
+        result[i] = acc
     }
     return result
 }
