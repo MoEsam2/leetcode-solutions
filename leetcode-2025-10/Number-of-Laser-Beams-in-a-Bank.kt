@@ -1,13 +1,16 @@
 class Solution {
-   fun numberOfBeams(bank: Array<String>): Int {
+fun numberOfBeams(bank: Array<String>): Int {
     var count = 0
-    for (i in 0 until bank.size-1) {
-        val current= bank[i].count { it == '1' }
-        val next = bank[i+1].count { it == '1' }
-        if (current == 0 &&i == 0) continue
-        else if (current!=0 && next == 0) bank[i+1] = bank[i]
-        else if(current!=0 && next != 0) count += current * next
+    var prev = 0
+
+    for (row in bank) {
+        val current = row.count { it == '1' }
+        if (current == 0) continue
+        count += prev * current
+        prev = current
     }
+
     return count
 }
+
 }
