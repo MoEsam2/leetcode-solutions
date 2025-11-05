@@ -8,23 +8,14 @@
  * }
  */
 class Solution {
- fun middleNode(head: ListNode?): ListNode? {
-    var size = 0
-    var current = head
-    while (current != null){
-        size++
-        current = current.next
-    }
-    var index =0
-    current = head
-    var currentNode :ListNode
-    while (current!= null ){
-        if (index == size/2) {
-            currentNode = current
-            return currentNode
-        }
-        index++
-        current = current.next
+fun middleNode(head: ListNode?): ListNode? {
+    var slow = head
+    var fast = head
+    if(fast?.next == null)return slow
+    while (fast != null){
+        slow = slow?.next
+        fast = fast?.next?.next
+        if(fast?.next == null) return slow
     }
     return null
 }
