@@ -9,13 +9,13 @@
  */
 
 class Solution {
-    fun hasCycle(head: ListNode?): Boolean {
-    val seen = mutableSetOf<ListNode>()
-    var current = head
-    while (current != null){
-        if(current in seen) return true
-        seen.add(current)
-        current = current.next
+fun hasCycle(head: ListNode?): Boolean {
+    var fast = head
+    var slow = head
+    while (fast?.next != null){
+        slow = slow?.next
+        fast = fast?.next?.next
+        if(fast == slow) return true
     }
     return false
 }
