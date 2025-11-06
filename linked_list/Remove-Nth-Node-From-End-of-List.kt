@@ -8,16 +8,11 @@
  * }
  */
 class Solution {
-   fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
-    var current = head
-    var size = 0
-    while (current != null) {
-        size++
-        current = current.next
-    }
+fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
+    var size = getLinkedListSize(head)
     val dummy = ListNode(0).apply { next = head }
     var prev = dummy
-    current = head
+    var current = head
     var counter = 0
     while (current != null) {
         var indexFromEnd = size - counter
@@ -30,5 +25,15 @@ class Solution {
         current = current.next
     }
     return dummy.next
+}
+
+fun getLinkedListSize(head: ListNode?): Int {
+    var current = head
+    var size = 0
+    while (current != null) {
+        size++
+        current = current.next
+    }
+    return size
 }
 }
