@@ -8,24 +8,32 @@
  * }
  */
 class Solution {
-    fun reorderList(head: ListNode?): Unit {
-    val stack = Stack<ListNode>()
-    var size = 0
-    var pointer = head
-    while (pointer != null) {
-        size++
-        stack.push(pointer)
-        pointer = pointer.next
+fun reorderList(head: ListNode?): Unit {
+    var slow = head
+    var fast = head
+    while (fast?.next?.next != null) {
+        slow = slow?.next
+        fast = fast.next?.next
     }
-    var current = head
-    var next = head?.next
-    for (i in 0 until size / 2) {
-        val lastValue = stack.pop()
-        current?.next = lastValue
-        lastValue.next = next
-        current = next
-        next = next?.next
+    var prev: ListNode? = null
+    var current = slow?.next
+    slow?.next = null
+    while (current != null) {
+        val temp = current.next
+        current.next = prev
+        prev = current
+        current = temp
     }
-    current?.next = null
+
+    var front = head
+    var last = prev
+    while (last != null){
+        val firstTemp = front?.next
+        val secondTemp = last.next
+        front?.next = last
+        last.next =  firstTemp
+        front = firstTemp
+        last = secondTemp
+    }
 }
 }
