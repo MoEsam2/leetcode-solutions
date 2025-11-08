@@ -24,16 +24,12 @@ class Solution {
             secPointer = secPointer.next
         }
     }
-    while (firstPointer != null) {
-        tail.next = ListNode(firstPointer.`val`)
-        tail = tail.next!!
-        firstPointer = firstPointer.next
+    if (firstPointer != null) {
+        tail.next = firstPointer
     }
 
-    while (secPointer != null) {
-        tail.next = ListNode(secPointer.`val`)
-        tail = tail.next!!
-        secPointer = secPointer.next
+    if (secPointer != null) {
+        tail.next = secPointer
     }
     return dummy.next
 }
