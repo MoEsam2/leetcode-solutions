@@ -15,11 +15,11 @@ class Solution {
     var tail = dummy
     while (firstPointer != null && secPointer != null) {
         if (firstPointer.`val` <= secPointer.`val`) {
-            tail.next = ListNode(firstPointer.`val`)
+            tail.next = firstPointer
             tail = tail.next!!
             firstPointer = firstPointer.next
         }else{
-            tail.next = ListNode(secPointer.`val`)
+            tail.next = secPointer
             tail=tail.next!!
             secPointer = secPointer.next
         }
