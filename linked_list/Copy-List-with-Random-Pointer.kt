@@ -11,19 +11,28 @@
 
 class Solution {
     fun copyRandomList(node: Node?): Node? {
-    val map = hashMapOf<Node, Node>()
+    if (node == null) return null
     var current = node
     while (current != null) {
-        map[current] = Node(current.`val`)
-        current = current.next
+        var copy = Node(current.`val`)
+        copy.next = current.next
+        current.next = copy
+        current = copy.next
     }
     current = node
     while (current != null) {
-        val copy = map[current]
-        copy?.next = map[current.next]
-        copy?.random = map[current.random]
+        current.next?.random = current.random?.next
+        current = current.next?.next
+    }
+    current = node
+    val dummy = Node(0)
+    var tail = dummy
+    while (current != null) {
+        tail.next = current.next
+        tail = tail.next!!
+        current.next = current.next?.next
         current = current.next
     }
-    return map[node]
+    return dummy.next
 }
 }
