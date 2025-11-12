@@ -8,27 +8,24 @@
  * }
  */
 class Solution {
-   fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
-    fun listToNumber(node: ListNode?): String {
-        var current = node
-        val sb = StringBuilder()
-        while (current != null) {
-            sb.insert(0, current!!.`val`)
-            current = current!!.next
-        }
-        return sb.toString()
-    }
-
-    val num1 = listToNumber(l1).toBigInteger()
-    val num2 = listToNumber(l2).toBigInteger()
-    val sum = num1 + num2
-    val reversedSum = sum.toString().reversed()
+ fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
+    var firstPointer = l1
+    var secondPointer = l2
+    var carry = 0
     val dummy = ListNode(0)
     var current = dummy
-    for (c in reversedSum) {
-        current.next = ListNode(c.digitToInt())
+    while (firstPointer != null || secondPointer != null) {
+        val x = firstPointer?.`val` ?: 0
+        val y = secondPointer?.`val` ?: 0
+        val sum = x + y + carry
+        carry = sum / 10
+        current.next = ListNode(sum % 10)
         current = current.next!!
-
+        firstPointer = firstPointer?.next
+        secondPointer = secondPointer?.next
+    }
+    if (carry > 0) {
+        current.next = ListNode(carry)
     }
     return dummy.next
 }
