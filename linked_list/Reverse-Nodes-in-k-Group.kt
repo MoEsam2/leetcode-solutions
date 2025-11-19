@@ -22,7 +22,7 @@ class Solution {
             index++
         }
         if (index != k){
-         tail.next = next
+         tail.next = start
          break
         }
         next = current?.next
