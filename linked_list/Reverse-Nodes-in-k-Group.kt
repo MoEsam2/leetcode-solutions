@@ -8,37 +8,41 @@
  * }
  */
 class Solution {
-   fun reverseKGroup(head: ListNode?, k: Int): ListNode? {
+fun reverseKGroup(head: ListNode?, k: Int): ListNode? {
+    if (head == null || k == 1) return head
+
     val dummy = ListNode(0)
+    dummy.next = head
     var tail = dummy
+
+    var start = head
     var current = head
     var index = 1
-    var next: ListNode? = null
-    var start = head
+
     while (current != null) {
-        while (current != null && index != k) {
+        while (current != null && index < k) {
             current = current.next
-            if (current == null) break
             index++
         }
-        if (index != k){
-         tail.next = start
-         break
+        if (current == null) {
+            tail.next = start
+            break
         }
-        next = current?.next
+        val nextGroupStart = current.next
+        
         var prev: ListNode? = null
-        var currentShift = start
+        var currShift = start
         var nextShift = start?.next
-        while (currentShift != next) {
-            currentShift?.next = prev
-            prev = currentShift
-            currentShift = nextShift
+        while (currShift != nextGroupStart) {
+            currShift?.next = prev
+            prev = currShift
+            currShift = nextShift
             nextShift = nextShift?.next
         }
         tail.next = prev
         tail = start!!
-        start = next
-        current = next
+        start = nextGroupStart
+        current = nextGroupStart
         index = 1
     }
     return dummy.next
